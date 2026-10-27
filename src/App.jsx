@@ -1,25 +1,31 @@
-
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
-function Home() {
-  return <h2>Home Page</h2>;
-}
-
-function About() {
-  return <h2>About Page</h2>;
-}
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "./redux/counterSlice";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
+  const [value, setValue] = useState(1);
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
+  const count = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+
+      <button onClick={() => dispatch(increment(value))}>
+        Increment
+      </button>
+
+      <button onClick={() => dispatch(decrement(value))}>
+        Decrement
+      </button>
+    </div>
   );
 }
 
