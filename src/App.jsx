@@ -1,16 +1,21 @@
-import { useSelector,useDispatch } from "react-redux";
-import {increment,decrement}from "./counterSlice"
+import { useReducer} from "react";
 
+function reducer(state,action){
+  if (action.type==="increment"){
+    return state+1;
+  }
+  if (action.type==="decrement"){
+    return state-1;
+  }
+  return state;
+}
 function App(){
-  
-const count=useSelector((state)=>state.counter.count)
-const dispatch=useDispatch()
-
+const[count,dispatch]=useReducer(reducer,0)
 return(
   <div>
-<h1>counter:{count}</h1>
-<button onClick={()=>dispatch(increment(5))}>increment</button>
-<button onClick={()=>dispatch(decrement(2))}>decrement</button>
+    <h2>{count}</h2>
+    <button onClick={()=>dispatch({type:"increment"})}>increment</button>
+    <button onClick={()=>dispatch({type:"decrement"})}>decrement</button>
   </div>
 )
 }
