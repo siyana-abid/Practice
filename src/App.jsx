@@ -7,6 +7,9 @@ function reducer(state,action){
   if (action.type==="decrement"){
     return state-1;
   }
+  if (action.type==="reset"){
+    return state;
+  }
   return state;
 }
 function App(){
@@ -16,6 +19,7 @@ return(
     <h2>{count}</h2>
     <button onClick={()=>dispatch({type:"increment"})}>increment</button>
     <button onClick={()=>dispatch({type:"decrement"})}>decrement</button>
+    <button onClick={()=>dispatch({type:"reset"})}>resett</button>
   </div>
 )
 }
